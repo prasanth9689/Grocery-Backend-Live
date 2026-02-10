@@ -101,3 +101,43 @@ Response
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSIsInJvbGUiOiJhZG1pbiIsInRlbmFudCI6InRlc3QyIiwiaWF0IjoxNzcwNzEzNTkwLCJleHAiOjE3NzEzMTgzOTB9.kbyrCQbkhvuwiUq12whB-Q4M_qTJSIOQ4Ch8nYqUlyE"
 }
 ```
+## Test Order API
+Create Order
+```
+POST https://test.skyblue.co.in/api/orders
+Authorization: Bearer <token>
+Content-Type: application/json
+```
+Body:
+```
+{
+  "items": [
+    { "product_id": 1, "quantity": 2 },
+    { "product_id": 2, "quantity": 1 }
+  ]
+}
+```
+Architecture Notes (Important for SaaS) <br>
+This implementation:
+- Uses tenant DB via req.db
+- Uses transaction (ACID safe)
+- Deducts stock safely
+- Secured by JWT
+- User isolation per tenant
+This is production-grade pattern used in SaaS systems.
+
+## pm2
+pm2 show list
+```
+pm2 list
+```
+For restart all
+```
+pm2 restart all
+```
+
+For log
+```
+ pm2 logs grocery-saas
+```
+

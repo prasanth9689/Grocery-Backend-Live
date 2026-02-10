@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const authRoutes = require("./routes/auth.routes");
 const productRoutes = require("./routes/product.routes");
+const orderRoutes = require("./routes/order.routes");
 
 const app = express();
 app.use(express.json());
@@ -66,6 +67,7 @@ app.get('/api', async (req, res) => {
 
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("SaaS running on port " + process.env.PORT);
