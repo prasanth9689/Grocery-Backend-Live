@@ -2,6 +2,9 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
+const authRoutes = require("./routes/auth.routes");
+const productRoutes = require("./routes/product.routes");
+
 const app = express();
 app.use(express.json());
 
@@ -61,6 +64,10 @@ app.get('/api', async (req, res) => {
   });
 });
 
+app.use("/api/products", productRoutes);
+app.use("/api/auth", authRoutes);
+
 app.listen(process.env.PORT, () => {
   console.log("SaaS running on port " + process.env.PORT);
 });
+
