@@ -3,8 +3,8 @@ const router = express.Router();
 const controller = require("../controllers/order.controller");
 const auth = require("../middleware/auth.middleware");
 
-router.post("/", auth, controller.createOrder);
-router.get("/", auth, controller.getMyOrders);
-router.get("/:id", auth, controller.getOrderById);
+router.post("/", auth.verifyToken, controller.createOrder);
+router.get("/", auth.verifyToken, controller.getMyOrders);
+router.get("/:id", auth.verifyToken, controller.getOrderById);
 
 module.exports = router;
